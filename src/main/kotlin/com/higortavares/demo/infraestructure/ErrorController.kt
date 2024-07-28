@@ -1,6 +1,7 @@
 package com.higortavares.demo.infraestructure
 
 import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.HttpMessageConversionException
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 
@@ -8,5 +9,5 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 class ErrorController {
 
     @ExceptionHandler
-    fun handleRandomicError(ex:RuntimeException) = ResponseEntity.internalServerError().body("Random error")
+    fun handleInvalidMessage(ex: HttpMessageConversionException) = ResponseEntity.badRequest().body(ex.message)
 }
