@@ -1,6 +1,8 @@
-build-java:
-	./gradlew build && java -jar build/libs/app.jar
+build-jars:
+	./gradlew build
 
-docker-build:
-	docker build --build-arg JAR_FILE=build/libs/\*.jar -t higortavares/demo-spring .
+docker-build: build-jars
+	docker build --build-arg JAR_FILE=build/libs/\*.jar -t demo-spring .
+run: docker-build
+	docker-compose up -d
 
